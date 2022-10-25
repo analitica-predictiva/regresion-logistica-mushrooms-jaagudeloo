@@ -131,6 +131,8 @@ def pregunta_03():
 
     # Cree un pipeline que contenga un estimador OneHotEncoder y un estimador
     # LogisticRegression con una regularización Cs=10
+    # CV = 10 va a testear 10 valores diferentes para la regresión logística
+    # y va a escoger el mejor
     pipeline = Pipeline(
         steps=[
             ("onehotencoder", OneHotEncoder()),
@@ -151,7 +153,7 @@ def pregunta_04():
     """
 
     # Importe confusion_matrix
-    from ____ import ____
+    from sklearn.metrics import confusion_matrix
 
     # Obtenga el pipeline de la pregunta 3.
     pipeline = pregunta_03()
@@ -160,14 +162,14 @@ def pregunta_04():
     X_train, X_test, y_train, y_test = pregunta_02()
 
     # Evalúe el pipeline con los datos de entrenamiento usando la matriz de confusion.
-    cfm_train = ____(
-        y_true=____,
-        y_pred=____.____(____),
+    cfm_train = confusion_matrix(
+        y_true = y_train,
+        y_pred = pipeline.predict(X_train),
     )
 
-    cfm_test = ____(
-        y_true=____,
-        y_pred=____.____(____),
+    cfm_test = confusion_matrix(
+        y_true = y_test,
+        y_pred = pipeline.predict(X_test),
     )
 
     # Retorne la matriz de confusion de entrenamiento y prueba
